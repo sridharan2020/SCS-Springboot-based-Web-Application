@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scs</title>
+<!--     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+<!--    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>-->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/bootstrap5.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/font.css}" href="../../static/css/font.css" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="../../static/js/bootstrap.min.js"></script>
+    <style>
+    
+    
+    
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+    .header {
+
+        background: white;
+        color: #8C477E;
+        font-size: 15px;
+      }
+
+      ul {
+        list-style-type: none;
+     }
+	.navbar {
+		display: block;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.background {
+		background: #8C477E;
+		background-blend-mode: darken;
+		background-size: cover;
+	}
+
+	.nav-list {
+	    color: white;
+		display: flex;
+		align-items: center;
+	}
+
+	.logo {
+		display: flex;
+		justify-content: center;
+
+	}
+
+	.logo img {
+		width: 140px;
+		border-radius:35px;
+	}
+    .events{
+            text-align: center;
+            padding: 10px 0;
+                align-items: center;
+                justify-content: center;
+                background: #8C477E;
+                color:white;
+                font-family: 'Ubuntu', sans-serif;
+          }
+
+
+	.center {
+		text-align: center;
+	}
+
+	.text-footer {
+		text-align: center;
+		padding: 10px 0;
+		font-family: 'Ubuntu', sans-serif;
+		display: flex;
+		justify-content: center;
+		color: white;
+	}
+ 
+    
+          a:hover { text-decoration: none; }
+          table, td, th {  
+  border: 1px solid black;
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 15px;
+  text-align:center
+}
+.button{
+	
+	border-style:none;
+	color:white;
+}
+
+ .back{
+	background: -webkit-linear-gradient(to right,#c05eac, rgba(250,208,196,0.5));
+  
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, #c05eac, rgba(250,208,196,0.5))
+  
+}
+.cards{box-sizing: border-box; 	
+ 	 border-radius: 1rem;
+ 	background: -webkit-linear-gradient(to right,#c05eac, rgba(250,208,196,0.5));
+  
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, #c05eac, rgba(250,208,196,0.5));
+  
+ 	 border: 1px solid #8C477E;
+ 	 width:460px;
+ 	 height:auto;
+ 	 gap:20px;
+ 	 display:grid;
+ 	 color:black;
+ 	 padding:20px;
+ 	 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ }
+.card{box-sizing: border-box; 	
+ 	 border-radius: 1rem;
+ 	 background-color: hsl(0, 0%, 95%);
+ 	 border: 3px solid #8C477E;
+ 	 width:410px;
+ 	 height:auto;
+ 	 color:black;
+ 	 padding:10px;
+ 	 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ }
+
+          </style>
+</head>
+
+
+
+<body>
+
+
+<div class="container-fluid">
+
+    <div class="header">
+        <div class="logo">
+            <img th:src="@{/images/SCS_lOGO.jpg}"  src="../../static/images/SCS_lOGO.jpg" />
+            <ul><br><br>
+                <li><h1>Student Counselling Services</h1></li>
+                <li><h5>Indian Institute of Technology (Banaras Hindu University) Varanasi</h5></li>
+            </ul> </div>
+
+
+    <nav class="events">IM GROUPS
+          </nav>
+
+    
+    <br>
+      <div th:if="${admin}">
+          <div style="text-align:right">
+                  <button style="background-color:white;padding:2px; border-radius: 25px; border-color:#854779">  <a th:href="@{/iMGroupss/add}" style="color:#854779"> Add group <span>&#63; </span> </a></button>
+                </div>
+
+          <br>
+          </div>
+           <center>
+            <div th:if="${iMGroupss.empty}" th:text="#{iMGroups.list.empty}" />
+            <div th:if="${!iMGroupss.empty}" class="overflow-x-auto">
+            
+            
+            <div class="cards">
+            <div th:each="iMGroups : ${iMGroupss}" class="card">
+            <p>Group ID:  <a th:href="@{/iMGroupss/{groupID}(groupID=${iMGroups.groupID})}" th:text="${iMGroups.groupID}"/>
+                           </p>
+            <p>Supervised by: <span th:text="${iMGroups.supervised_by}" /></p>
+            <p>Induction year: <span th:text="${iMGroups.induction_year}" /></p>
+            
+            <div th:if="${isMember}">
+                <div th:if="${flag1 eq 1}">
+                    <form th:action="@{/iMGroupss/{im_grp_id}/join/{mentor_id}(im_grp_id=${iMGroups.groupID}, mentor_id=${current_mentor.mentorID})}" method="post" class="js-submit-confirm float-right">
+                        <button type="submit">Join this group</button>
+                    </form>
+                </div>
+                <div th:if="${(flag1 eq 0) and (#strings.equals(current_mentor.im_grp_id, #strings.toString(iMGroups.groupID)))}">
+                    <p>You are already in this group!!</p>
+                </div>
+                <div th:if="${(flag1 eq 2)}">
+                    <p>You are not a mentor!!</p>
+                </div>
+            </div>
+            <div th:if="${isStudent}">
+                <div th:if="${flag2 eq 1}">
+                    <form th:action="@{/iMGroupss/{im_grp_id}/join_student/{stud_id}(im_grp_id=${iMGroups.groupID}, stud_id=${current_student.studentRollNo})}" method="post" class="js-submit-confirm float-right">
+                        <button type="submit">Join this group</button>
+                    </form>
+                </div>
+                <div th:if="${(flag2 eq 0) and (#strings.equals(current_student.group_id, #strings.toString(iMGroups.groupID)))}">
+                    <p>You are already in this group!!</p>
+                </div>
+                <div th:if="${(flag2 eq 2)}">
+                    <p>You are not a student!!</p>
+                </div>
+            </div>
+            <div>
+                <div th:each="user : ${group_users.get(iMGroups.groupID)}">
+                    <a th:href="@{/profile/{userID}(userID = ${user.user_id})}" th:text="${user.fullName}"/>
+                 </div>
+<!--                                <p th:text="${group_mentor_ids.get(iMGroups.groupID)}"> </p>-->
+
+                <form sec:authorize="hasAnyAuthority('ADMIN', 'SCS_MEMBER')" th:action="@{/iMGroupss/delete/{groupID}(groupID=${iMGroups.groupID})}" th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm float-right">
+                    <button style="padding:3px ;background-color:#854779;"> <a style="color:white" th:href="@{/iMGroupss/edit/{groupID}(groupID=${iMGroups.groupID})}" th:text="#{event.list.edit}" class="inline-block text-white bg-sky-500 hover:bg-sky-600 focus:ring-sky-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" /></button>
+                    <button style="padding:3px" th:text="#{event.list.delete}" type="submit" class="inline-block text-white bg-red-500 hover:bg-red-600 focus:ring-red-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                </form>
+            </div>
+            
+            
+            
+            </div>
+           
+            </div>
+            
+            
+            </div>
+   </center>
+
+  
+        <br>
+        <footer class="background">
+            <p class="text-footer">
+                contact us @ <a href="tel:+05890000111"></a>
+            </p>
+
+
+        </footer>
+</div>
+</div>
+</body>
+
+</html>

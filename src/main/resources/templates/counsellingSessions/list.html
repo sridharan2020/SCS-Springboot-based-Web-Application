@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scs</title>
+   
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+<!--    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>-->
+    <link th:href="@{/css/bootstrap5.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/font.css}" href="../../static/css/font.css" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="../../static/js/bootstrap.min.js"></script>
+
+    <style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+    .header {
+
+        background: white;
+        color: #8C477E;
+        font-size: 15px;
+      }
+
+      ul {
+        list-style-type: none;
+     }
+	.navbar {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.background {
+		background: #8C477E;
+		background-blend-mode: darken;
+		background-size: cover;
+	}
+
+	.nav-list {
+	    color: white;
+		display: flex;
+		align-items: center;
+	}
+
+	.logo {
+		display: flex;
+		justify-content: center;
+
+	}
+
+	.logo img {
+		width: 140px;
+		border-radius:35 px;
+	}
+
+
+
+	.center {
+		text-align: center;
+	}
+
+	.text-footer {
+		text-align: center;
+		padding: 10px 0;
+		font-family: 'Ubuntu', sans-serif;
+		display: flex;
+		justify-content: center;
+		color: white;
+	}
+
+
+
+   .cards {
+             margin: 0 auto;
+   			 max-width: 1500px;
+    		display: grid;
+   			 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    		
+    		gap: 10px;
+   			 font-family: sans-serif;
+    		padding-top: 10px;
+    		justify-content:center;
+          }
+   .card {
+            box-shadow: 1px 1px 1px 1px #6d3862;
+            transition: 0.3s;
+            padding:3px;
+            border-color:#8C477E;
+            border-width: 8px;
+           width:250px;
+           display:inline-block;
+           position: relative;
+           background-color:white;
+           
+          }
+
+
+          .card:hover {
+            box-shadow: 0 8px 8px 0 rgba(0,0,0,0.2);
+          }
+
+
+          .container {
+            padding: 2px 16px;
+            justify-content: center;
+          }
+          .events{
+            text-align: center;
+            padding: 18px 0;
+                align-items: center;
+                justify-content: center;
+                background: #8C477E;
+                color:white;
+                font-family: 'Ubuntu', sans-serif;
+          }
+
+          .card-title{
+            text-align: center;
+            padding: 10px 0;
+                align-items: center;
+                justify-content: center;
+                color:#854779;
+                font-family: 'Ubuntu', sans-serif;
+          }
+          .card-footer{
+            text-align: center;
+            padding: 10px 0;
+                align-items: center;
+                justify-content: center;
+                color:#8C477E;
+                font-family: 'Ubuntu', sans-serif;
+          }
+          .card-body{
+            text-align: center;
+            padding: 1px 0;
+                align-items: center;
+                justify-content: center;
+
+                font-family: 'Ubuntu', sans-serif;
+          }
+          a:hover { text-decoration: none; }
+          
+          .back{
+	background: -webkit-linear-gradient(to right,#c05eac, rgba(250,208,196,0.5));
+  
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, #c05eac, rgba(250,208,196,0.5))
+  
+}
+          </style>
+</head>
+
+
+
+<body>
+
+<div class="container-fluid">
+
+    <div class="header">
+        <div class="logo">
+        <img th:src= "@{/images/SCS_lOGO.jpg}">
+            <ul><br><br>
+                <li><h1>Student Counselling Services</h1></li>
+                <li><h5>Indian Institute of Technology (Banaras Hindu University) Varanasi</h5></li>
+            </ul> </div>
+    </div>
+
+    <nav class="events">
+        <b>COUNSELLING SESSIONS</b>
+    </nav>
+    <br>
+    <div class="back">
+            <table class="table">
+                <thead style="background-color:#854779;color:white">
+                <tr>
+                    <th scope="col">Session ID</th>
+                    <th scope="col">Feedback</th>
+                    <th scope="col">From time</th>
+                    <th scope="col">To time</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Counselor</th>
+                    <th scope="col">Student</th>
+                    <div sec:authorize="hasAnyAuthority('ADMIN')">
+                        <th scope="col">Action</th>
+                    </div>
+
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:if="!${counsellingSessionss}">
+                    <td colspan="9" style="text-align:center"> No faculty  </td>
+                </tr>
+                <tr style="color:black" th:each="csession : ${counsellingSessionss}" >
+                    <td scope="row" th:text="${csession.sessionID}"></td>
+                    <td scope="row" th:text="${csession.feedback}"></td>
+                    <td scope="row" th:text="${csession.fromTime}" ></td>
+                    <td scope="row" th:text="${csession.toTime}" ></td>
+                    <td scope="row" th:text="${csession.date}"></td>
+                    <td scope="row" th:text="${csession.counseledBy.name}" ></td>
+                    <td scope="row" th:text="${csession.counselsToString}" ></td>
+                    <div sec:authorize="hasAnyAuthority('ADMIN')">
+                        <td>
+                            <form th:action="@{/counsellingSessionss/delete/{sessionID}(sessionID=${csession.sessionID})}" th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm float-left" >
+                                <a style="padding:3px" th:href="@{/counsellingSessionss/edit/{sessionID}(sessionID=${csession.sessionID})}"  ><i class='fas fa-edit' style='font-size:24px; color:#8C477E'></i></a>
+                                <button  type="submit"  > <i class='fas fa-trash-alt' style='font-size:24px; color:#8C477E'></i></button>
+                            </form>
+                        </td>
+                    </div>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <br>
+    <br>
+    <footer class="background">
+        <p class="text-footer">
+            contact us @ <a href="tel:+05890000111"></a>
+        </p>
+    </footer>
+</div>
+
+</body>
+
+</html>

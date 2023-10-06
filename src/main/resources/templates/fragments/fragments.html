@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div th:fragment="cdn">
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+    <link th:href="@{/css/bootstrap5.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/font.css}" href="../../static/css/font.css" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="../../static/js/bootstrap.min.js"></script>
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+<!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css" />-->
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+</div>
+<div th:fragment="navcss">
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+
+            background: white;
+            color: #8c4d79;
+            font-size: 15px;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .background {
+            background: #8C477E;
+            background-blend-mode: darken;
+            background-size: cover;
+        }
+
+        .nav-list {
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+
+        }
+
+        .logo img {
+            width: 140px;
+            border-radius:35px;
+        }
+
+        .nav-list li {
+            color: white;
+            list-style: none;
+            display:flex;
+            padding:6px
+        }
+
+        .nav-list li a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-list li :hover {
+            color: rgb(227, 192, 18);
+        }
+
+
+        .center {
+            text-align: center;
+        }
+
+        .text-footer {
+            text-align: center;
+            padding: 10px 0;
+            font-family: 'Ubuntu', sans-serif;
+            display: flex;
+            justify-content: center;
+            color: white;
+        }
+        .hamburger {
+            display: none;
+        }
+
+
+
+
+
+        @media (max-width: 900px) {
+            .navbar {
+                display:none;
+                align-items: center;
+                justify-content: left;
+            }
+            .background {
+                background: #8C477E;
+                background-blend-mode: darken;
+                background-size: cover;
+            }
+            .hamburger {
+                display: block;
+                color:white;
+                padding:2px;
+                font-size: 24px;
+                background: #8C477E;
+            }
+
+            .nav-list li {
+                list-style: none;
+                display:block;
+                padding:17px
+            }
+
+            .nav-list li a {
+                text-decoration: none;
+                display:block;
+                color: white;
+            }
+
+            .nav-list li a:hover {
+                color: rgb(227, 192, 18);
+            }
+
+
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            color:white;
+            background-color: #ae5a9d;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            padding: 1px 1px;
+            z-index: 1;
+        }
+        .dropdown-content a {
+            color: white;
+            padding: 10px 10px;
+            text-decoration: none;
+            display: block;
+            border-color: black;
+            border-radius: 2px;
+        }
+        .dropdown-content a:hover {background-color: #8C477E;
+            color: rgb(227, 192, 18);
+        }
+        .dropdown:hover .dropdown-content {
+
+            display: block;
+        }
+
+        .card {
+
+            box-shadow: 1px 1px 1px 1px #6d3862;
+            transition: 0.3s;
+            padding:30px;
+            border-color:#8C477E;
+            border-width: 1px;
+            border-color: black;
+        }
+
+
+        .card:hover {
+            box-shadow: 0 8px 8px 0 rgba(0,0,0,0.2);
+        }
+
+
+
+        .events{
+            text-align: center;
+            padding: 18px 0;
+            align-items: center;
+            justify-content: center;
+            background: #8C477E;
+            color:white;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        .card-title{
+            text-align: center;
+            padding: 10px 0;
+            align-items: center;
+            justify-content: center;
+            color:#854779;
+            font-family: 'Ubuntu', sans-serif;
+        }
+        .card-footer{
+            text-align: center;
+            padding: 10px 0;
+            align-items: center;
+            justify-content: center;
+            color:#8C477E;
+            font-family: 'Ubuntu', sans-serif;
+        }
+        .card-body{
+            text-align: center;
+            padding: 1px 0;
+            align-items: center;
+            justify-content: center;
+
+            font-family: 'Ubuntu', sans-serif;
+        }
+        .menu li {
+            list-style: none;
+            display:block;
+            padding:10px;
+            background-color:#8C477E;
+            width:200px;
+            border-style:solid;
+            border-width:1px;
+            text-align:center;
+            color:white;
+        }
+
+        .menu li a {
+            text-decoration: none;
+            display:block;
+            color: white;
+        }
+
+        .menu li a:hover {
+            color: rgb(227, 192, 18);
+        }
+
+
+
+        .menu-container .menu {
+            display: none;
+        }
+        .menu-container:focus-within .menu {
+            display: block;
+        }
+
+    </style>
+</div>
+<div th:fragment="header">
+
+    <div th:href="@{/home}" class="header">
+        <div  class="logo">
+            <a th:href="@{/home}"> <img th:src="@{/images/SCS_lOGO.jpg}"  src="../../static/images/SCS_lOGO.jpg" />
+            </a><ul><br><br>
+            <li><h1>Student Counseling Service</h1></li>
+            <li><h5>Indian Institute of Technology (Banaras Hindu University) Varanasi</h5></li>
+            </ul> </div>
+    </div>
+    <nav class="navbar background ">
+        <ul class="nav-list">
+
+            <li><a href="/home#about">About</a></li>
+            <div class="dropdown" th:if="${admin}">  Team
+                <div class="dropdown-content">
+                    <li><a th:href="@{/sCSMemberss}">SCS members</a></li>
+                    <a th:href="@{/facultys}">Faculty list</a>
+
+                </div>
+            </div>
+
+
+            <li class="dropdown" th:if="${admin} "> <a th:href="@{/students}">students</a>
+            <li><a th:href="@{/events}">Events</a></li>
+            <li><a th:href="@{/initiatives}">Initiatives</a></li>
+
+            <li> <div class="dropdown">
+                Counselling
+                <div class="dropdown-content">
+
+                    <a th:href="@{/counselors}">Counsellors</a>
+                    <a th:href="@{/counsellingSessionss}">Counselling Sessions</a>
+
+                </div>
+            </div>	</li>
+
+            <div class="dropdown" > <li>Induction</li>
+                <div class="dropdown-content">
+
+                    <a th:href="@{/inductionmentors}">Induction mentors</a>
+                    <a th:href="@{/inductionPrograms}">Induction programs</a>
+
+                </div>
+            </div>
+            <li><a th:href="@{/verticals}">Verticals</a></li>
+            <li th:if="${admin} "><a th:href="@{../venues}">Venues</a></li>
+
+            <li th:if="${admin}"> <div class="dropdown" >
+                Reports, meetings and bills
+                <div class="dropdown-content">
+
+                    <a th:href="@{/monthlyReports}">Monthly reports</a>
+                    <a th:href="@{/bills}">Bills</a>
+                    <a th:href="@{/team_meeting}">Team Meetings</a>
+
+                </div>
+            </div>
+            </li>
+
+            <li th:if="${student}"><a th:href="@{/application/add}" >Apply for scs?</a></li>
+            <li th:if="${log}"><a th:href="@{/logout}" >logout</a></li>
+            <li><a th:href="@{/notification}" ><i class='fas fa-bell' style='font-size:16px'></i></a></li>
+            <li th:if="${!log}"><a th:href="@{/login}" >login/sign up</a></li>
+            <li th:if="${log}"><a th:href="@{/dashboard}"  ><i class="fa fa-user"  style='font-size:20px'></i></a></li>
+
+
+        </ul>
+
+    </nav>
+
+    <div class="menu-container">
+        <nav style="background-color:#8C477E">  <button type="button" class="hamburger" style="border-style:none"><div style=" width: 30px;
+  height: 3px;
+  background-color: white;
+  margin: 6px 0;"></div>
+            <div style=" width: 30px;
+  height: 3px;
+  background-color: white;
+  margin: 6px 0;"></div>
+            <div style=" width: 30px;
+  height: 3px;
+  background-color: white;
+  margin: 6px 0;"></div></button> </nav>
+
+        <ul class="menu">
+            <li><a href="/home#about">About</a></li>
+            <li th:if="${admin} ">  <div  class="dropdown">  Team
+                <div class="dropdown-content">
+                    <a th:href="@{/sCSMemberss}">SCS members</a>
+                    <a th:href="@{/facultys}">Faculty list</a>
+
+                </div>
+            </div></li>
+
+
+            <li th:if="${admin} "> <a th:href="@{/students}">students</a>
+            <li><a th:href="@{/events}">Events</a></li>
+            <li><a th:href="@{/initiatives}">Initiatives</a></li>
+
+            <li th:if="${admin}"> <div class="dropdown">
+                Counselling
+                <div class="dropdown-content">
+
+                    <a th:href="@{/counselors}">Counsellors</a>
+                    <a th:href="@{/counsellingSessionss}">Counselling Sessions</a>
+
+                </div>
+            </div>	</li>
+
+            <li><div class="dropdown">
+                Induction
+                <div class="dropdown-content">
+
+                    <a th:href="@{/inductionmentors}">Induction mentors</a>
+                    <a th:href="@{/inductionPrograms}">Induction programs</a>
+
+                </div>
+            </div></li>
+            <li><a th:href="@{../verticals}">Verticals</a></li>
+            <li th:if="${admin} "><a th:href="@{/venues}">Venues</a></li>
+
+            <li th:if="${admin}"> <div class="dropdown">
+                Reports and bills
+                <div class="dropdown-content">
+
+                    <a th:href="@{/monthlyReports}">Monthly reports</a>
+                    <a th:href="@{/bills}">Bills</a>
+                    <a th:href="@{/team_meeting}">Team Meetings</a>
+
+                </div>
+            </div>	</li>
+
+
+            <li th:if="${student}"><a th:href="@{/application/add}" >Apply for scs?</a></li>
+
+            <li th:if="${student}"><a th:href="@{/notification}" >Notifications</a></li>
+
+            <li th:if="${!log}"><a th:href="@{/login}" >login/sign up</a></li>
+            <li th:if="${log}"><a th:href="@{/dashboard}" >Profile</a></li>
+            <li th:if="${log}"><a th:href="@{/logout}" >logout</a></li>
+
+        </ul>
+
+    </div>
+</div>
+<div th:fragment="navbar">
+    <div th:href="@{/home}" class="header">
+        <div  class="logo">
+            <a th:href="@{/home}"> <img th:src="@{/images/SCS_lOGO.jpg}"  src="../../static/images/SCS_lOGO.jpg" />
+                <br><br></a>
+            <ul>
+            <li><h1>Student Counseling Service</h1></li>
+            <li><h5>Indian Institute of Technology (Banaras Hindu University) Varanasi</h5></li>
+            </ul> </div>
+    </div>
+
+
+
+    <nav class="mb-0 navbar background content-align: center">
+        <ul class="nav-list">
+
+            <li><a th:href="@{/home}">Home</a></li>
+            <li><a th:href="@{/events}">Events</a></li>
+            <li><a th:href="@{/initiatives}">Initiatives</a></li>
+            <li><a th:href="@{/counselors}">Cousellors</a></li>
+
+            <div class="dropdown" > <li>Induction</li>
+                <div class="dropdown-content">
+                    <a th:href="@{/inductionPrograms}">Induction programs</a>
+                    <a th:href="@{/inductionmentors}">Induction mentors</a>
+                </div>
+            </div>
+            <li><a th:href="@{/verticals}">Verticals</a></li>
+        </ul>
+
+    </nav>
+
+
+    <div class="mb-0 menu-container">
+        <nav style="background-color:#8C477E">  <button type="button" class="hamburger" style="border-style:none"><div style=" width: 30px;
+  height: 3px;
+  background-color: white;
+  margin: 6px 0;"></div>
+            <div style=" width: 30px;
+  height: 3px;
+  background-color: white;
+  margin: 6px 0;"></div>
+            <div style=" width: 30px;
+  height: 3px;
+  background-color: white;
+  margin: 6px 0;"></div></button> </nav>
+
+        <ul class="menu">
+            <li><a href="#about">About</a></li>
+            <li><a th:href="@{/events}">Events</a></li>
+            <li><a th:href="@{/initiatives}">Initiatives</a></li>
+            <li><a th:href="@{/counselors}">cousellors list</a></li>
+            <li><div class="dropdown">
+                Induction
+                <div class="dropdown-content">
+                    <a th:href="@{/inductionmentors}">Induction mentors</a>
+                    <a th:href="@{/inductionPrograms}">Induction programs</a>
+                </div>
+            </div></li>
+            <li><a th:href="@{/verticals}">Verticals</a></li>
+        </ul>
+
+    </div>
+
+
+
+
+</div>
+<div th:fragment="footer">
+    <footer class="background">
+        <p class="text-footer" style="color:white">
+
+            <a th:href="@{/buymebook}" style="color:white" >buy us a book</a>
+        </p>
+
+
+    </footer>
+</div>
+</body>
+</html>
+
+<th:block th:replace="fragments/fragments.html::cdn"></th:block>
+<th:block th:replace="fragments/fragments.html::navcss"></th:block>
+<div th:replace="fragments/fragments.html::navbar"></div>
+<div th:replace="fragments/fragments.html ::footer"></div>

@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+    <link th:href="@{/css/bootstrap5.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/font.css}" href="../../static/css/font.css" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="../../static/js/bootstrap.min.js"></script>
+    <title> Donate us a book!</title>
+     <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+
+            background: white;
+            color: #8C477E;
+            font-size: 15px;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+        .nav {
+            display: block;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .background {
+            background: #8C477E;
+            background-blend-mode: darken;
+            background-size: cover;
+        }
+
+        .nav li {
+            display: inline;
+            padding-right: 20px;
+            color:white;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+
+        }
+
+        .logo img {
+            width: 140px;
+            border-radius:35px;
+        }
+        .events{
+            text-align: center;
+            padding: 10px 0;
+            align-items: center;
+            justify-content: center;
+            background: #8C477E;
+            color:white;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+
+        .center {
+            text-align: center;
+        }
+
+        .text-footer {
+            text-align: center;
+            padding: 10px 0;
+            font-family: 'Ubuntu', sans-serif;
+            display: flex;
+            justify-content: center;
+            color: white;
+        }
+
+
+        a:hover { text-decoration: none; }
+        table, td, th {
+            border: 1px solid black;
+            text-align: left;
+        }
+       
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align:center
+        }
+        .button{
+            border-style:none;
+            color:white;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+        <div class="logo">
+           <img src= "..\css\SCS_lOGO.jpg">
+            <ul><br><br>
+                <li><h1>Student Counselling Services</h1></li>
+                <li><h5>Indian Institute of Technology (Banaras Hindu University) Varanasi</h5></li>
+            </ul> </div>
+
+
+    <nav class="events">SCS
+         </nav>
+
+    <br>
+
+<div class="m-3 d-flex justify-content-center">
+    <div class="card" style="width: 30rem;border-color:#8C477E;border-width:3px;height: 30rem;">
+        <img th:src="@{/images/book.jpg}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <center><h3 class="my-3">Buy us a book!</h3></center>
+            <input id="payment_field" type="number" class="form-control my-2" placeholder="Enter the amount here"/>
+            <div onclick="paymentStart()" class="m-3 mt-5 d-flex justify-content-center"><a href="#"><button  type="button" class="btn btn-outline-success">Buy us a Book</button></a></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+
+        const paymentStart=()=>{
+            let amount=$("#payment_field").val();
+            console.log(amount);
+            if(amount==="" || amount===null){
+                alert("amount is required !!");
+                return;
+            }
+            //code
+            console.log("hello");
+            const Data = $.ajax(
+                {
+                    url: 'buymebook/create_order',
+                    data: JSON.stringify({amount: amount, info: 'order_request'}),
+                    contentType: 'application/json',
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (response) {
+                        //invoked when success
+                        console.log(response);
+                        if (response.status === 'created') {
+                            // open Payment Form
+                            let options = {
+                                key: '',
+                                amount: response.amount,
+                                currency: 'INR',
+                                name: 'Student Counselling Services',
+                                descrption: "Buy us a Book",
+                                image: "https://scontent.fdel29-1.fna.fbcdn.net/v/t39.30808-6/302298645_461477982666475_6819662143705113237_n.png?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=XoKvOs7Rhk0AX9s_Ew7&_nc_ht=scontent.fdel29-1.fna&oh=00_AfDciMf4PQOB5HSu_HaX45VUBvHkeehps2zLueQ3EIRi0w&oe=636D8371",
+                                order_id: response.id,
+                                handler: function (response) {
+                                    console.log(response.razorpay_payment_id);
+                                    console.log(response.razorpay_order_id);
+                                    console.log(response.razorpay_signature);
+                                    console.log("Payment Sucesssfull");
+                                    alert("Congrations!! Payment Sucessfull");
+                                },
+                                prefill: {
+                                    name: "",
+                                    email: "",
+                                    contact: "",
+                                },
+                                notes: {
+                                    address: "SCS Office"
+                                },
+                                theme: {
+                                    color: "#3399cc"
+                                },
+                            };
+                            let rzp = new Razorpay(options);
+
+                            rzp.on('payment.failed', function (response) {
+                                console.log(response.error.code);
+                                console.log(response.error.description);
+                                console.log(response.error.source);
+                                console.log(response.error.step);
+                                console.log(response.error.reason);
+                                console.log(response.error.metadata.order_id);
+                                console.log(response.error.metadata.payment);
+                                alert("Oops payment failed!");
+                            });
+
+                            rzp.open();
+
+                        }
+                    },
+                    error: function (error) {
+                        //invoked when error
+                        console.log(error);
+                        alert("Something went wrong !!");
+                    }
+                }
+            );
+
+        }
+
+    </script>
+    
+    <footer class="background">
+            <p class="text-footer">
+                contact us @ <a href="tel:+05890000111"></a>
+            </p>
+
+
+        </footer>
+</body>
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+<!--  &lt;!&ndash; Bootstrap CSS &ndash;&gt;-->
+<!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"-->
+<!--        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+<!--  &lt;!&ndash;    Font Awesome&ndash;&gt;-->
+<!--  <script src="https://kit.fontawesome.com/f85f93ad8b.js" crossorigin="anonymous"></script>-->
+  <link th:href="@{/css/bootstrap5.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+  <link th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+  <link th:href="@{/css/font.css}" href="../../static/css/font.css" rel="stylesheet">
+  <script th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
+  <script th:src="@{/js/bootstrap.min.js}" src="../../static/js/bootstrap.min.js"></script>
+  <style>
+    .img-thumbnail {
+        padding: .25rem;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+        border-radius: .25rem;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .social-link {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #ddd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #666;
+        border-radius: 50%;
+        transition: all 0.3s;
+        font-size: 0.9rem;
+    }</style>
+  <style>
+            .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+        @media (min-width: 992px) {
+          .rounded-lg-3 { border-radius: .3rem; }
+        }
+
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      .b-example-divider {
+  height: 3rem;
+  background-color: rgba(0, 0, 0, .1);
+  border: solid rgba(0, 0, 0, .15);
+  border-width: 1px 0;
+  box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+}
+
+.bi {
+  vertical-align: -.125em;
+  fill: currentColor;
+}
+
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: #fff;
+  border-radius: .75rem;
+}
+
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+}
+.icon-link > .bi {
+  margin-top: .125rem;
+  margin-left: .125rem;
+  transition: transform .25s ease-in-out;
+  fill: currentColor;
+}
+.icon-link:hover > .bi {
+  transform: translate(.25rem);
+}
+
+.icon-square {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.5rem;
+  border-radius: .75rem;
+}
+
+.rounded-4 { border-radius: .5rem; }
+.rounded-5 { border-radius: 1rem; }
+
+.text-shadow-1 { text-shadow: 0 .125rem .25rem rgba(0, 0, 0, .25); }
+.text-shadow-2 { text-shadow: 0 .25rem .5rem rgba(0, 0, 0, .25); }
+.text-shadow-3 { text-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .25); }
+
+.card-cover {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+    </style>
+  <style>
+
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+    .header {
+
+        background: white;
+        color: #8c4d79;
+        font-size: 15px;
+      }
+
+      ul {
+        list-style-type: none;
+     }
+	.navbar {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.background {
+		background: #8C477E;
+		background-blend-mode: darken;
+		background-size: cover;
+	}
+
+	.nav-list {
+	    color: white;
+		display: flex;
+		align-items: center;
+	}
+
+	.logo {
+		display: flex;
+		justify-content: center;
+
+	}
+
+	.logo img {
+		width: 140px;
+		border-radius:35 px;
+	}
+
+	.nav-list li {
+        color: white;
+		list-style: none;
+	    display:flex;
+        padding:10px
+	}
+
+	.nav-list li a {
+		text-decoration: none;
+		color: white;
+	}
+
+	.nav-list li :hover {
+		color: rgb(227, 192, 18);
+	}
+
+
+	.center {
+		text-align: center;
+	}
+
+	.text-footer {
+		text-align: center;
+		padding: 10px 0;
+		font-family: 'Ubuntu', sans-serif;
+		display: flex;
+		justify-content: center;
+		color: white;
+	}
+    .hamburger {
+        display: none;
+    }
+
+
+
+
+
+           @media (max-width: 768px) {
+            .navbar {
+                display: none;
+                align-items: center;
+                justify-content: center;
+            }
+            .background {
+                background: #8C477E;
+                background-blend-mode: darken;
+                background-size: cover;
+            }
+            .hamburger {
+                display: block;
+                color:white;
+                padding:2px;
+                font-size: 24px;
+                background: #8C477E;
+            }
+
+            .nav-list li {
+                list-style: none;
+                display:none;
+                padding:17px
+            }
+
+            .nav-list li a {
+                text-decoration: none;
+                color: white;
+            }
+
+            .nav-list li a:hover {
+                color: rgb(227, 192, 18);
+            }
+
+
+           }
+           .dropdown {
+            position: relative;
+            display: inline-block;
+          }
+
+          .dropdown-content {
+            display: none;
+            position: absolute;
+            color:white;
+            background-color: #ae5a9d;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            padding: 1px 1px;
+            z-index: 1;
+          }
+          .dropdown-content a {
+            color: white;
+            padding: 10px 10px;
+            text-decoration: none;
+            display: block;
+            border-color: black;
+            border-radius: 2px;
+          }
+          .dropdown-content a:hover {background-color: #8C477E;
+            color: rgb(227, 192, 18);
+        }
+          .dropdown:hover .dropdown-content {
+
+            display: block;
+          }
+
+          .card {
+
+            box-shadow: 1px 1px 1px 1px #6d3862;
+            transition: 0.3s;
+            padding:30px;
+            border-color:#8C477E;
+            border-width: 1px;
+            border-color: black;
+          }
+
+
+          .card:hover {
+            box-shadow: 0 8px 8px 0 rgba(0,0,0,0.2);
+          }
+
+
+          .container {
+            padding: 2px 16px;
+            justify-content: center;
+          }
+          .events{
+            text-align: center;
+            padding: 18px 0;
+                align-items: center;
+                justify-content: center;
+                background: #8C477E;
+                color:white;
+                font-family: 'Ubuntu', sans-serif;
+          }
+
+          .card-title{
+            text-align: center;
+            padding: 10px 0;
+                align-items: center;
+                justify-content: center;
+                color:#854779;
+                font-family: 'Ubuntu', sans-serif;
+          }
+          .card-footer{
+            text-align: center;
+            padding: 10px 0;
+                align-items: center;
+                justify-content: center;
+                color:#8C477E;
+                font-family: 'Ubuntu', sans-serif;
+          }
+          .card-body{
+            text-align: center;
+            padding: 1px 0;
+                align-items: center;
+                justify-content: center;
+
+                font-family: 'Ubuntu', sans-serif;
+          }
+          .grid-container {
+            display: grid;
+            grid-template-columns: auto auto auto ;
+            justify-content: center;
+
+          }
+          .grid-item{
+            padding:15px
+          }
+    </style>
+
+</head>
+<body>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+  <div class="header">
+    <div class="logo">
+      <img th:src="@{/images/SCS_lOGO.jpg}"  src="../../static/images/SCS_lOGO.jpg" />
+      <ul><br><br>
+        <li><h1>Student Counselling Services</h1></li>
+        <li><h5>Indian Institute of Technology (Banaras Hindu University) Varanasi</h5></li>
+      </ul> </div>
+  </div>
+ <nav class="navbar background">
+  <ul class="nav-list">
+
+    <li><a href="#about">About</a></li>
+
+    <div class="dropdown">
+      <li>Team</li>
+      <div class="dropdown-content">
+
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+      </div>
+    </div>
+
+    <li><a th:href="@{../events}">Events</a></li>
+    <li><a th:href="@{../initiatives}">Initiatives</a></li>
+
+
+    <div class="dropdown">
+      <li>Couselling</li>
+      <div class="dropdown-content">
+
+        <a href="#">cousellors list</a>
+
+      </div>
+    </div>
+    <div class="dropdown">
+      <li>Students</li>
+      <div class="dropdown-content">
+
+        <a th:href="@{../students}">students</a>
+        <a href="#">Alumni</a>
+
+      </div>
+    </div>
+    <div class="dropdown">
+      <li>Faculty</li>
+      <div class="dropdown-content">
+
+        <a href="#">faculty</a>
+
+      </div>
+    </div>
+    <div class="dropdown">
+      <li>Books</li>
+      <div class="dropdown-content">
+
+        <a href="#">Available Books</a>
+        <a href="#">All books</a>
+
+      </div>
+    </div>
+    <div class="dropdown">
+      <li>Awards</li>
+      <div class="dropdown-content">
+
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <li>Induction</li>
+      <div class="dropdown-content">
+
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+      </div>
+    </div>
+
+    <li><a th:href="@{/login}" >login/sign up</a></li>
+  </ul>
+
+
+</nav>
+
+<div class="container col-xxl-8 px-4 py-5">
+  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+    <div class="col-10 col-sm-8 col-lg-6">
+      <img th:src="@{/images/vertical/wellness.jpeg}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+    </div>
+    <div class="col-lg-6">
+      <h1 class="display-5 fw-bold lh-1 mb-3">Wellness Team</h1>
+      <ul><li><p class="lead">We follow the aim ”Wellness is the key to the overall growth of a person.”</p>
+      </li><li><p class="lead">Our Primary Vision is to help students maintain their Physical and Mental wellness by inculcating healthy practices and good lifestyle.</p>
+      </li>
+        <li><p class="lead">We organize Mindfulness Meditation, Yoga, Spiritual sessions, etc., to help students cope up with the hustle of college life.</p>
+        </li>
+        <li><p class="lead"> Our important vision is to enable students to take care of their well-being while pursuing their education.”</p>
+        </li>
+
+
+
+      </ul>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <a href="#team" class="btn btn-primary btn-lg px-4 me-md-2">Our Team</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container py-5">
+  <div class="row mb-4">
+    <div class="col-lg-5">
+      <h2 id="team" class="display-4 font-weight-light">Our team</h2>
+      <!-- <p>Hello</p> -->
+    </div>
+  </div>
+
+  <div class="row text-center">
+    <!-- Team item-->
+    <div th:if="${sCSMemberss.empty}" th:text="#{sCSMembers.list.empty}"/>
+
+      <div th:each="member_map : ${sCSMemberss}" class="col-xl-3 col-sm-6 mb-5">
+        <div class="bg-white rounded shadow-sm py-5 px-4"><img th:src="@{/images/profile.webp}" alt="" width=  "100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+          <h5 th:text="${member_map.value?.name}" class="mb-0"></h5><span class="small text-uppercase text-muted" th:text="${member_map.key.currentPosition}"></span>
+          <p class="m-0" th:text="${member_map.value?.department}"></p>
+          <p>Batch -<span class="m-0" th:text="${member_map.value?.yearOfjoin}"></span></p>
+        </div>
+      </div>
+
+  </div>
+</div>
+</body>
+</html>

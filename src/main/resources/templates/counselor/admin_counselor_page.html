@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scs</title>
+<!--    <link rel= "stylesheet" type="text/css" href="C:\Users\guddaji sriprada\Desktop\scs_frontend\css\style.css">-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+<!--    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>-->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/bootstrap5.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/font.css}" href="../../static/css/font.css" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="../../static/js/bootstrap.min.js"></script>
+    <style>
+    
+    
+    
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+    .header {
+
+        background: white;
+        color: #8C477E;
+        font-size: 15px;
+      }
+
+      ul {
+        list-style-type: none;
+     }
+	.navbar {
+		display: block;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.background {
+		background: #8C477E;
+		background-blend-mode: darken;
+		background-size: cover;
+	}
+
+	.nav-list {
+	    color: white;
+		display: flex;
+		align-items: center;
+	}
+
+	.logo {
+		display: flex;
+		justify-content: center;
+
+	}
+
+	.logo img {
+		width: 140px;
+		border-radius:35 px;
+	}
+    .events{
+            text-align: center;
+            padding: 10px 0;
+                align-items: center;
+                justify-content: center;
+                background: #8C477E;
+                color:white;
+                font-family: 'Ubuntu', sans-serif;
+          }
+
+
+	.center {
+		text-align: center;
+	}
+
+	.text-footer {
+		text-align: center;
+		padding: 10px 0;
+		font-family: 'Ubuntu', sans-serif;
+		display: flex;
+		justify-content: center;
+		color: white;
+	}
+ 
+    
+          a:hover { text-decoration: none; }
+          table, td, th {  
+  border: 1px solid black;
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 15px;
+  text-align:center
+}
+.button{
+	border-style:none;
+	color:white;
+}
+.card{
+	width:445px;
+	border-style:solid;
+	border-color:#8C477E;
+	border-width:1px;
+	padding:8px;
+	background-color:white;
+	 box-shadow: inset 0 0 10px #8C477E;
+	
+}
+.back{
+	background: -webkit-linear-gradient(to right,#c05eac, rgba(250,208,196,0.5));
+  
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, #c05eac, rgba(250,208,196,0.5))
+  
+}
+
+
+          </style>
+</head>
+
+
+
+<body>
+
+
+<div class="container-fluid">
+
+    <div class="header">
+        <div class="logo">
+           <img th:src= "@{/images/SCS_lOGO.jpg}">
+            <ul><br><br>
+                <li><h1>Student Counselling Services</h1></li>
+                <li><h5>Indian Institute of Technology (Banaras Hindu University) Varanasi</h5></li>
+            </ul> </div>
+
+ <nav class="events"> 
+           <ul>
+           
+            <li><div style="text-align:left;position: absolute;">  <button style="background-color:white;padding:2px; border-radius: 20px; border-color:#854779; ">  <a  th:href="@{/counselors}" style="color:#854779"> <i class="fa fa-arrow-left" style="font-size:16px"></i> Back to list </a></button></div></li>
+  <li> <b>COUNSELORS<b> </li></nav>
+ <br>
+   
+    <div class="back">
+    <br>
+    <center>
+      <div class= "container" style="width:460px;border-style:solid;border-color:#8C477E; padding:5px; background-color:white">
+      <div class="card">
+      <div class="card-title" style="font-family: Times New Roman;font-size:35px;font-weight: bold;text-shadow: 2px 2px 2px #ababab;"><span th:text="${counselor.getName()}"></span></div>
+      <div class="card-body"><p style="font-family: Times New Roman;color:black;font-size:15px;">ID:<span style="font-family: Times New Roman;color:black;font-size:15px;font-weight: bold;text-shadow: 2px 2px 2px #ababab;" th:text="${counselor.counselorId}"></span></p></div>
+       <p style="font-family: Times New Roman;color:black;font-size:20px;">Designation : <span th:text="${counselor.designation}"/></p>
+       <p style="font-family: Times New Roman;color:black;font-size:20px;">Qualifications : <span th:text="${counselor.qualification}"/></p>
+       <p style="font-family: Times New Roman;color:black;font-size:20px;">Available timings : <span th:text="${counselor.start_time}"/>-<span th:text="${counselor.end_time}"/></p>
+       <p style="font-family: Times New Roman;color:black;font-size:20px;">Job Type : <span th:text="${counselor.getJobType()}"/></p>
+       <p style="font-family: Times New Roman;color:black;font-size:20px;">Email : <a th:href="'mailto:' + ${counselor.getEmailId()}"> <span th:text="${counselor.getEmailId()}"/></a></p>
+       <p style="font-family: Times New Roman;color:black;font-size:20px;">Phone no. : <span th:text="${counselor.getPhoneNo()}"/></p>
+    
+      <form th:action="@{/counselors/delete/{counselorId}(counselorId=${counselor.counselorId})}" th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm float-right">
+           <button style="padding:3px ;background-color:#854779;"> <a style="color:white" th:href="@{/counselors/edit/{counselorId}(counselorId=${counselor.counselorId})}" th:text="#{event.list.edit}" class="inline-block text-white bg-sky-500 hover:bg-sky-600 focus:ring-sky-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" /></button>
+            <button style="padding:3px" th:text="#{event.list.delete}" type="submit" class="inline-block text-white bg-red-500 hover:bg-red-600 focus:ring-red-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+         </form>
+      <br>
+      </div>
+        </div>
+     
+         </center>
+           <br>
+           </div>
+           
+
+  
+       <br>
+        <footer class="background">
+            <p class="text-footer">
+                contact us @ <a href="tel:+05890000111"></a>
+            </p>
+
+
+        </footer>
+</div>
+
+</body>
+
+</html>

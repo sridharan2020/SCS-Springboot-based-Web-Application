@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+    <link th:href="@{/css/bootstrap5.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/font.css}" href="../../static/css/font.css" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="../../static/js/bootstrap.min.js"></script>
+    <style>
+    body{
+      margin-top:20px;
+  }
+
+  [class*="noty_theme__unify--v1"] {
+    box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    padding: 1.57143rem;
+  }
+
+  .noty_theme__unify--v1--dark {
+    background-color: #2e3c56;
+  }
+
+  .noty_theme__unify--v1--light {
+    background-color: #fff;
+    box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.05);
+  }
+
+  .noty_type__success.noty_theme__unify--v1 {
+    background-color: #1cc9e4;
+  }
+
+  .noty_type__info.noty_theme__unify--v1 {
+    background-color: #1d75e5;
+  }
+
+  .noty_type__error.noty_theme__unify--v1 {
+    background-color: #e62154;
+  }
+
+  .noty_type__warning.noty_theme__unify--v1 {
+    background-color: #e6a821;
+  }
+
+  .noty_body {
+    font-weight: 400;
+    font-size: 1rem;
+    color: #fff;
+  }
+
+  [class*="noty_theme__unify--v1"] .noty_body {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+
+  .noty_theme__unify--v1--light .noty_body {
+    color: #41464B;
+  }
+
+  .noty_body__icon {
+    position: relative;
+    display: inline-block;
+    color: #fff;
+    text-align: center;
+    border-radius: 50%;
+  }
+
+  .noty_body__icon::before {
+    display: block;
+  }
+
+  .noty_body__icon > i {
+    position: relative;
+    top: 50%;
+    display: block;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+    z-index: 2;
+  }
+
+  .noty_theme__unify--v1 .noty_body__icon {
+    background-color: rgba(245, 249, 249, 0.2);
+  }
+
+  .noty_theme__unify--v1--dark .noty_body__icon {
+    background-color: rgba(245, 249, 249, 0.1);
+  }
+
+  .noty_theme__unify--v1--dark.noty_type__success .noty_body__icon {
+    color: #1cc9e4;
+  }
+
+  .noty_theme__unify--v1--dark.noty_type__info .noty_body__icon {
+    color: #1d75e5;
+  }
+
+  .noty_theme__unify--v1--dark.noty_type__error .noty_body__icon {
+    color: #e62154;
+  }
+
+  .noty_theme__unify--v1--dark.noty_type__warning .noty_body__icon {
+    color: #e6a821;
+  }
+
+  .noty_theme__unify--v1--light.noty_type__success .noty_body__icon {
+    background-color: rgba(28, 201, 228, 0.15);
+    color: #1cc9e4;
+  }
+
+  .noty_theme__unify--v1--light.noty_type__info .noty_body__icon {
+    background-color: rgba(29, 117, 229, 0.15);
+    color: #1d75e5;
+  }
+
+  .noty_theme__unify--v1--light.noty_type__error .noty_body__icon {
+    background-color: rgba(230, 33, 84, 0.15);
+    color: #e62154;
+  }
+
+  .noty_theme__unify--v1--light.noty_type__warning .noty_body__icon {
+    background-color: rgba(230, 168, 33, 0.15);
+    color: #e6a821;
+  }
+
+  [class*="noty_theme__unify--v1"] .noty_close_button {
+    top: 14px;
+    right: 14px;
+    width: 0.85714rem;
+    height: 0.85714rem;
+    line-height: 0.85714rem;
+    background-color: transparent;
+    font-weight: 300;
+    font-size: 1.71429rem;
+    color: #fff;
+    border-radius: 0;
+  }
+
+  .noty_theme__unify--v1--light .noty_close_button {
+    color: #cad6d6;
+  }
+
+  .noty_progressbar {
+    height: 0.5rem !important;
+  }
+
+  .noty_theme__unify--v1 .noty_progressbar {
+    background-color: rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .noty_theme__unify--v1--dark.noty_type__success .noty_progressbar {
+    background-color: #1cc9e4;
+  }
+
+  .noty_theme__unify--v1--dark.noty_type__info .noty_progressbar {
+    background-color: #1d75e5;
+  }
+
+  .noty_theme__unify--v1--dark.noty_type__error .noty_progressbar {
+    background-color: #e62154;
+  }
+
+  .noty_theme__unify--v1--dark.noty_type__warning .noty_progressbar {
+    background-color: #e6a821;
+  }
+
+  .noty_theme__unify--v1--light.noty_type__success .noty_progressbar {
+    background-color: rgba(28, 201, 228, 0.15);
+  }
+
+  .noty_theme__unify--v1--light.noty_type__info .noty_progressbar {
+    background-color: rgba(29, 117, 229, 0.15);
+  }
+
+  .noty_theme__unify--v1--light.noty_type__error .noty_progressbar {
+    background-color: rgba(230, 33, 84, 0.15);
+  }
+
+  .noty_theme__unify--v1--light.noty_type__warning .noty_progressbar {
+    background-color: rgba(230, 168, 33, 0.15);
+  }
+
+    .g-mb-25 {
+      margin-bottom: 1.78571rem !important;
+    }
+</style>
+
+    <title>Notification</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<div class="container">
+    <h3 class="d-flex align-self-center text-uppercase g-font-size-12 g-font-size-default--md g-color-black g-mb-20">Notification</h3>
+    <div th:if="${notificationList.isEmpty()}" >Yay! no notification left.</div>
+    <div class="row">
+        <div th:each="notification : ${notificationList}" class="col-md-6">
+            <!-- Success -->
+            <a th:id="${notification.notification_id}" th:href="@{/{notification_type}/{notification_id}(notification_type = ${notification.getType()},notification_id = ${notification.getUrl_id()})}">
+                <div   class="g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-20--md g-mb-30">
+                    <div class="noty_bar noty_type__success noty_theme__unify--v1 g-mb-25">
+                        <div class="noty_body">
+                            <div class="g-mr-20">
+                                <div class="noty_body__icon">
+                                    <i class="hs-admin-check"></i>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div th:text="${notification.getType()}"></div>
+                                </div>
+                                <div class="col">
+                                    <div th:text="${notification.getTime()}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<script th:inline="javascript">
+    function mark_as_read(tag_id){
+        $(tag_id).click(function (){
+            console.log("clicked");
+            let mp = {};
+            mp["notification_id"] = tag_id.slice(1);
+            $.ajax({
+                method:"post",
+                url:"/notification/markasread",
+                dataType:"json",
+                data:mp
+            });
+        });
+    }
+    let notifications = [[${notificationList}]];
+    notifications.forEach((notification) => {
+        mark_as_read("#"+notification.notification_id.toString());
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Meetings</title>
+<!--    <link rel= "stylesheet" type="text/css" href="C:\Users\guddaji sriprada\Desktop\scs_frontend\css\style.css">-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+<!--    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/bootstrap5.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/font.css}" href="../../static/css/font.css" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="../../static/js/bootstrap.min.js"></script>
+    <style>
+
+
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+
+            background: white;
+            color: #8C477E;
+            font-size: 15px;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+        .navbar {
+            display: block;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .background {
+            background: #8C477E;
+            background-blend-mode: darken;
+            background-size: cover;
+        }
+
+        .nav-list {
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+
+        }
+
+        .logo img {
+            width: 140px;
+            border-radius:35px;
+        }
+        .events{
+            text-align: center;
+            padding: 10px 0;
+            align-items: center;
+            justify-content: center;
+            background: #8C477E;
+            color:white;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+
+        .center {
+            text-align: center;
+        }
+
+        .text-footer {
+            text-align: center;
+            padding: 10px 0;
+            font-family: 'Ubuntu', sans-serif;
+            display: flex;
+            justify-content: center;
+            color: white;
+        }
+
+
+        a:hover { text-decoration: none; }
+        table, td, th {
+            border: 1px solid black;
+            text-align: left;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align:center
+        }
+        .button{
+            border-style:none;
+            color:white;
+        }
+    </style>
+</head>
+
+
+
+<body>
+
+
+<div class="container-fluid">
+
+    <div class="header">
+        <div class="logo">
+            <img src= "..\css\SCS_lOGO.jpg">
+            <ul><br><br>
+                <li><h1>Student Counseling Service</h1></li>
+                <li><h5>Indian Institute of Technology (Banaras Hindu University) Varanasi</h5></li>
+            </ul> </div>
+
+
+        <nav class="events">
+            Team Meeting    </nav>
+
+        <br>
+
+
+        <div style="text-align:right">
+            <button style="background-color:white;padding:2px; border-radius: 25px; border-color:#854779">  <a th:href="@{/team_meeting/add}" style="color:#854779"> Add Meetings <span>&#63; </span> </a></button>
+        </div>
+
+        <br>
+
+
+        <table class="table">
+
+            <thead style="background-color:#854779;color:white">
+            <tr>
+                <th scope="col">Meeting Id</th>
+                <th scope="col">Date</th>
+                <th scope="col">From Time</th>
+                <th scope="col">Title</th>
+                <th scope="col">Meeting Description</th>
+                <th scope="col">Location</th>
+                <th scope="col">To Time</th>
+                <th scope="col">Organizer Id</th>
+                <th scope="col">Action</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="!${team_meetings}">
+                <td colspan="9" style="text-align:center"> No Meetings  </td>
+            </tr>
+
+            <tr style="color:black" th:each="team_meeting : ${team_meetings}" >
+                <td scope="row">
+                    <a th:href="@{/team_meeting/{meetingId}(meetingId=${team_meeting.meeting_id})}" th:text="${team_meeting.meeting_id}"></a>
+                </td>
+                <td scope="row" th:text="${team_meeting.date}"  >Name</td>
+                <td scope="row" th:text="${team_meeting.from_time}"  >Year of the join</td>
+                <td scope="row" th:text="${team_meeting.meeting_title}"  >Department</td>
+                <td scope="row" th:text="${team_meeting.meeting_description}" >Year of graduation</td>
+                <td scope="row" th:text="${team_meeting.location}"  >Program</td>
+                <td scope="row" th:text="${team_meeting.to_time}" >Date of birth</td>
+                <td scope="row" th:text="${team_meeting.organiser_id}" >phone no.</td>
+                <td th:if="${member_id}==${team_meeting.organiser_id} or ${isAdmin}" >
+
+                    <form th:action="@{/team_meeting/delete/{meetingID}(meetingID=${team_meeting.meeting_id})}" th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm float-left" >
+                        <a style="padding:3px" th:href="@{/team_meeting/edit/{teamMeetingId}(teamMeetingId=${team_meeting.meeting_id})}"  ><i class='fas fa-edit' style='font-size:24px; color:#8C477E'></i></a>
+                        <button type="submit"> <i class='fas fa-trash-alt' style='font-size:24px; color:#8C477E'></i></button>
+                    </form>
+
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+
+
+        <br>
+        <footer class="background">
+            <p class="text-footer">
+                contact us @ <a href="tel:+05890000111"></a>
+            </p>
+
+
+        </footer>
+    </div>
+</div>
+
+</body>
+
+</html>

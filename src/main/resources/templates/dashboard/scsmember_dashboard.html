@@ -1,0 +1,233 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+<!--    <link href="bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+<!--    <script src="https://kit.fontawesome.com/f85f93ad8b.js" crossorigin="anonymous"></script>-->
+    <link th:href="@{/css/bootstrap5.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/font.css}" href="../../static/css/font.css" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="../../static/js/bootstrap.min.js"></script>
+    <title>Member Profile</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<section style=" background-color: #eee;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb" class="d-flex justify-content-between bg-light rounded-3 p-3 mb-4">
+                    <div>
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                    </ol>
+                    <a th:href="@{/events/{studentID}/registered(studentID=${student.studentRollNo})}">Registered Events</a>
+                    <a th:href="@{/initiatives/{studentID}/registered(studentID=${student.studentRollNo})}">Registered Initiatives</a>
+                    </div>
+                    <div th:if="${!isRed}" class="cont"><a th:href="@{/notification}" class="align-content-end"><img th:src="@{/images/notification.svg}" alt="bell" width="30px" height="30px" preserveAspectRatio="none"></a>
+                    </div>
+                    <div th:if="${isRed}" class="cont"><a th:href="@{/notification}" class="align-content-end"><img th:src="@{/images/bell-solid.svg}" alt="bell" width="30px" height="30px" preserveAspectRatio="none"></a>
+                    </div>
+                </nav>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                             class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3" th:text="${student.name!=null}?${student.name}:'empty'"></h5>
+                        <p class="text-muted mb-1" th:text="${scsmember.currentPosition!=null}?${scsmember.currentPosition}:'empty'"></p>
+                        <p class="text-muted mb-4">Since <span id="from_date" th:text="${scsmember.fromDate!=null}?${scsmember.fromDate.toString()}:'empty'"></span></p>
+                        <!-- <div class="d-flex justify-content-center mb-2">
+                          <button type="button" class="btn btn-primary">Follow</button>
+                          <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="card mb-4 mb-lg-0">
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush rounded-3">
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <h6 class="mb-0">Name </h6>
+                                <p id="name" class="mb-0" th:text="${student.name!=null}?${student.name}:'empty'"></p>
+                                <input type="button" id="name_btn" th:value="Edit"/>
+                            </li>
+
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <h6 class="mb-0">Department</h6>
+                                <p id="dept" style="cursor:pointer" class="mb-0" th:text="${student.department!=null}?${student.department}:'empty'"></p>
+                                <input type="button" id="dept_btn" th:value="Edit"/>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <h6 class="mb-0">Program </h6>
+                                <p id="program" class="mb-0" th:text="${student.program!=null}?${student.program}:'empty'"></p>
+                                <input type="button" id="program_btn" th:value="Edit"/>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <h6 class="mb-0">Phone </h6>
+                                <p id="phone" class="mb-0" th:text="${student.phoneNumber!=null}?${student.phoneNumber}:'empty'"></p>
+                                <input type="button" id="phone_btn" th:value="Edit"/>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <h6 class="mb-0">Joining Year </h6>
+                                <p id="year_of_join" class="mb-0" th:text="${student.yearOfjoin!=null}?${student.yearOfjoin}:'empty'"></p>
+                                <input type="button" id="year_of_join_btn" th:value="Edit"/>
+                            </li>
+
+<!--                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">-->
+<!--                                <h6 class="mb-0">Graduation Year</h6>-->
+<!--                                <p id="year_of_graduation" class="mb-0" th:text="${student.yearOfGradn!=null}?${student.yearOfGradn}:'empty'"></p>-->
+<!--                                <input type="button" id="year_of_graduation_btn" th:value="Edit"/>-->
+<!--                            </li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0" >Full Name</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p id="name_2" class="text-muted mb-0" th:text="${student.name!=null}?${student.name}:'empty'"></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Email</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0 "th:text="${student.email!=null}?${student.email}:'empty'"></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Phone</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p id="phone_2" class="text-muted mb-0" th:text="${student.phoneNumber!=null}?${student.phoneNumber}:'empty'"></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Department</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p id="dept_2" class="text-muted mb-0" th:text="${student.department!=null}?${student.department}:'empty'"></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Position</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0" th:text="${scsmember.currentPosition!=null}?${scsmember.currentPosition}:'empty'"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mb-4 mb-md-0">
+                            <div class="card-body">
+                                <p class="mb-4"><span class="text-primary font-italic me-1">Registered</span> Initiatives
+                                </p>
+                                <div  th:each="initiatives : ${inititatives}" class="card">
+
+                                    <a th:href="@{/initiatives/{initiativesId}(initiativesId=${initiatives.initiativesId})}" >
+                                        <div class="card-body"  style=" color:black;">
+                                            <h4 class="card-title" th:text="${initiatives.title}"></h4>
+                                            <p>Date: <p th:text="${initiatives.startDate}"  ></p></p>
+                                            <p>Timings:<p th:text="${initiatives.timings}" ></p></p>
+
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-4 mb-md-0">
+                            <div class="card-body">
+                                <p class="mb-4"><span class="text-primary font-italic me-1">Registered</span>Events
+                                </p>
+                                <div  th:each="event : ${events}" class="card">
+
+                                    <a th:href="@{/events/{eventID}(eventID=${event.eventID})}" >
+                                        <div class="card-body"  style=" color:black;">
+                                            <h4 class="card-title" th:text="${event.event_name}"></h4>
+                                            <p>Date: <p th:text="${event.date}"  ></p></p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+        function all_attrs(a){
+            let attr = $('#'+ a);
+            let attr_btn =  $('#' + a +'_btn');
+            let mp = {};
+            attr_btn.click(function(){
+                if(attr_btn.attr('value')==='Edit'){
+                    attr_btn.attr('value','Save');
+                    attr.attr('contenteditable','true');
+                    attr.css('cursor','text');
+                }else{
+                    mp["attr_change"] = a;
+                    mp["attr_value"] = attr.text();
+                    if(mp["attr_change"]==="name" || mp["attr_change"]==="dept" || mp["attr_change"]==="phone"){
+                        $('#'+mp["attr_change"]+'_2').text(mp["attr_value"]);
+                    }
+                    $.ajax({
+                        type:"post",
+                        url:"/scs_dashboard",
+                        dataType:'json',
+                        data:mp
+                    });
+                    attr_btn.attr('value','Edit');
+                    attr.attr('contenteditable','false');
+                    attr.css('cursor','pointer');
+                }
+
+            });
+        }
+        all_attrs('dob');
+        all_attrs('dept');
+        all_attrs('name');
+        all_attrs('phone');
+        all_attrs('program');
+        all_attrs('year_of_graduation');
+        all_attrs('year_of_join');
+
+    </script>
+
+</body>
+</html>
+
+

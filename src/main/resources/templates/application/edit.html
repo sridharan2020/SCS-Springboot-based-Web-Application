@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title th:text="#{application.edit.headline}" />
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="flex flex-wrap mb-6">
+        <h1 th:text="#{application.edit.headline}" class="grow text-3xl md:text-4xl font-medium mb-2" />
+        <div>
+            <a th:href="@{/applications}" th:text="#{application.edit.back}" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-4 rounded px-5 py-2" />
+        </div>
+    </div>
+    <div th:replace="fragments/forms::globalErrors('application')" />
+    <form th:action="${#httpServletRequest.requestURI}" method="post" th:object="${application}">
+
+        <p >Date of Application           :<input type="date" th:field="*{date_of_application}"></p>
+        <p >Status :<input type="checkbox" th:field="*{status}"></p>
+        <p>Program          :<input type="text" th:field="*{program}"></p>
+        <p >Department          : <input type="text" th:field="*{department}"></p>
+        <p> List of Pors          : <input type="text" th:field="*{list_of_pors}"></p>
+        <p> Commitment          : <input type="number" th:field="*{commitment}"></p>
+        <p> Skills          : <input type="text" th:field="*{skills}"></p>
+        <input type="submit" th:value="#{application.edit.headline}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2 mt-6" />
+    </form>
+</div>
+</body>
+</html>

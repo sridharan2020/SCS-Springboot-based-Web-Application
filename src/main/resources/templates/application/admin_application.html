@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+
+    <title>Application</title>
+<!--    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>-->
+    <link th:href="@{/css/bootstrap5.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/font.css}" href="../../static/css/font.css" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="../../static/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>-->
+<div class="d-flex justify-content-center mt-5">
+    <div class="card border-3 border-secondary" style="width: 18rem;">
+        <img th:src="@{/images/Notification.png}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title"> <span th:text="${vertical}"></span> Application</h5>
+            <p>Applied on <span th:text="${app.date_of_application}"></span></p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Roll No.- </strong><span th:text="${app.stud_id}"></span></li>
+            <li class="list-group-item"><strong>Program- </strong><span th:text="${app.program}"></span></li>
+            <li class="list-group-item"><strong>Department- </strong><span th:text="${app.department}"></span></li>
+            <li class="list-group-item"><strong>PORS- </strong><span th:text="${app.list_of_pors}"></span></li>
+            <li class="list-group-item"><strong>Commitment- </strong><span th:text="${app.commitment}"></span></li>
+            <li class="list-group-item"><strong>Skills- </strong><span th:text="${app.skills}"></span></li>
+            <li class="list-group-item"><strong>Position- </strong><span th:text="${app.position}"></span></li>
+            <li class="list-group-item">
+                <div id="approve_btn2" th:if="${app.status}" class="btn btn-success card-link">Approved</div>
+                <div id="approve_btn1" th:unless="${app.status}" class="btn btn-secondary card-link">Not Approved</div>
+            </li>
+
+        </ul>
+        <div th:if="${isAdmin}" class="d-flex justify-content-center card-body row">
+            <div id="approve_button" class="col btn btn-primary card-link">Approve</div>
+            <div class="col btn btn-secondary card-link" onclick="history.back()">Go Back</div>
+        </div>
+    </div>
+</div>
+<script th:inline="javascript">
+    let display = [[${app.status}]];
+    let approve_button = $("#approve_button");
+    let approve_ptag = $("#approve_ptag");
+    if(display){
+        approve_button.css("display","none");
+    }else{
+        approve_button.css("display","block");
+    }
+    approve_button.click(function (){
+        approve_button.css("display","none");
+        $('#approve_btn1').addClass('btn-success').removeClass('btn-secondary');
+        $('#approve_btn1').text('Approved');
+        // $('#approve_btn1').css('background-color','green');
+        let mp = {};
+        mp["applicationId"] = [[${app.application_id}]];
+        $.ajax({
+            type:"post",
+            url:"/application/approve",
+            dataType:"json",
+            data:mp
+        });
+    });
+</script>
+</body>
+</html>

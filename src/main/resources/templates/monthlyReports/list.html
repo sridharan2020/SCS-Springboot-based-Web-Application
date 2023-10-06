@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Reports </title>
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+<!--    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/bootstrap5.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/font.css}" href="../../static/css/font.css" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="../../static/js/bootstrap.min.js"></script>
+    <style>
+
+
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+
+            background: white;
+            color: #8C477E;
+            font-size: 15px;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+        .nav {
+            display: block;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .background {
+            background: #8C477E;
+            background-blend-mode: darken;
+            background-size: cover;
+        }
+
+        .nav li {
+            display: inline;
+            padding-right: 20px;
+            color:white;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+
+        }
+
+        .logo img {
+            width: 140px;
+            border-radius:35px;
+        }
+        .events{
+            text-align: center;
+            padding: 10px 0;
+            align-items: center;
+            justify-content: center;
+            background: #8C477E;
+            color:white;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+
+        .center {
+            text-align: center;
+        }
+
+        .text-footer {
+            text-align: center;
+            padding: 10px 0;
+            font-family: 'Ubuntu', sans-serif;
+            display: flex;
+            justify-content: center;
+            color: white;
+        }
+
+
+        a:hover { text-decoration: none; }
+        table, td, th {
+            border: 1px solid black;
+            text-align: left;
+        }
+       
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align:center
+        }
+        .button{
+            border-style:none;
+            color:white;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src= "..\css\SCS_lOGO.jpg">
+            <ul><br><br>
+                <li><h1>Student Counselling Services</h1></li>
+                <li><h5>Indian Institute of Technology (Banaras Hindu University) Varanasi</h5></li>
+            </ul> </div>
+
+
+        <nav class="events">
+            Monthly Reports   </nav>
+
+        <br>
+
+
+        <div style="text-align:right">
+            <button style="background-color:white;padding:2px; border-radius: 25px; border-color:#854779">  <a th:href="@{/monthlyReports/add}" style="color:#854779"> Add monthly Report <span>&#63; </span> </a></button>
+        </div>
+
+        <br>
+
+
+        <table class="table">
+
+            <thead style="background-color:#854779;color:white">
+            <tr>
+                <th scope="col">Report Id</th>
+                <th scope="col">Title</th>
+                <th scope="col">From Date</th>
+                <th scope="col">To Date</th>
+                <th scope="col">Compiled On</th>
+                <th scope="col">Action</th>
+
+            </tr>
+            </thead>
+            
+            <tbody>
+            <tr th:if="!${monthlyReports}">
+                <td colspan="6" style="text-align:center"> No Reports  </td>
+            </tr>
+            
+            <tr  style="color:black" th:each="monthlyReport : ${monthlyReports}" >
+                <td scope="row">
+                    <a th:href="@{/monthlyReports/{monthlyReportId}(monthlyReportId=${monthlyReport.report_id})}" scope="row" th:text="${monthlyReport.report_id}">Report Id</a>
+                </td>
+                <td scope="row" th:text="${monthlyReport.title}">Title</td>
+                <td scope="row" th:text="${monthlyReport.from_date}">From Date</td>
+                <td scope="row" th:text="${monthlyReport.to_date}"  >To Date</td>
+                <td scope="row" th:text="${monthlyReport.compiled_on}">Compiled On</td>
+                <td th:if="${member_id}==${monthlyReport.student_compiles_reports_id} or ${isAdmin}">
+
+                    <form th:action="@{/monthlyReports/delete/{reportID}(reportID=${monthlyReport.report_id})}"  th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm float-left" >
+                        <a style="padding:3px" th:href="@{/monthlyReports/edit/{reportID}(reportID=${monthlyReport.report_id})}"  ><i class='fas fa-edit' style='font-size:24px; color:#8C477E'></i></a>
+                        <button  type="submit"  > <i class='fas fa-trash-alt' style='font-size:24px; color:#8C477E'></i></button>
+                    </form>
+
+                </td>
+            </tr> 
+            </tbody>
+
+        </table>
+
+
+        <br>
+        <footer class="background">
+            <p class="text-footer">
+                contact us @ <a href="tel:+05890000111"></a>
+            </p>
+
+
+        </footer>
+    </div>
+</body>
+</html>

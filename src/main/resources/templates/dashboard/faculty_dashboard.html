@@ -1,0 +1,175 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+<!--    <link href="bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+    <link th:href="@{/css/bootstrap5.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/font.css}" href="../../static/css/font.css" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="../../static/js/bootstrap.min.js"></script>
+    <title>Member Profile</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<section style=" background-color: #eee;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                    </ol>
+
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                             class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3" th:text="${faculty.name!=null}?${faculty.name}:'empty'"></h5>
+                        <p class="text-muted mb-1" th:text="${faculty.department!=null}?${faculty.department}:'empty'"></p>
+                        <p class="text-muted mb-4" th:text="${faculty.qualification!=null}?${faculty.qualification}:'empty'"></p>
+
+                        <!-- <div class="d-flex justify-content-center mb-2">
+                          <button type="button" class="btn btn-primary">Follow</button>
+                          <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="card mb-4 mb-lg-0">
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush rounded-3">
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <h6 class="mb-0">Name </h6>
+                                <p id="name" class="mb-0" th:text="${faculty.name!=null}?${faculty.name}:'empty'"></p>
+                                <input type="button" id="name_btn" th:value="Edit"/>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <h6 class="mb-0">Department</h6>
+                                <p id="dept" style="cursor:pointer" class="mb-0" th:text="${faculty.department!=null}?${faculty.department}:'empty'"></p>
+                                <input type="button" id="dept_btn" th:value="Edit"/>
+                            </li>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <h6 class="mb-0">Phone </h6>
+                                <p id="phone_no" class="mb-0" th:text="${faculty.phoneNo!=null}?${faculty.phoneNo}:'empty'"></p>
+                                <input type="button" id="phone_no_btn" th:value="Edit"/>
+                            </li>
+
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <h6 class="mb-0">Qualification</h6>
+                                <p id="qualification" class="mb-0" th:text="${faculty.qualification!=null}?${faculty.qualification}:'empty'"></p>
+                                <input type="button" id="qualification_btn" th:value="Edit"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0" >Full Name</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p id="name_2" class="text-muted mb-0" th:text="${faculty.name!=null}?${faculty.name}:'empty'"></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Email</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0" th:text="${faculty.email!=null}?${faculty.email}:'empty'"></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Phone</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p id="phone_no_2" class="text-muted mb-0" th:text="${faculty.phoneNo!=null}?${faculty.phoneNo}:'empty'"></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Department</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p id="dept_2" class="text-muted mb-0" th:text="${faculty.department!=null}?${faculty.department}:'empty'"></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Qualification</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p id="qualification_2" class="text-muted mb-0" th:text="${faculty.qualification!=null}?${faculty.qualification}:'empty'"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    function all_attrs(a){
+        let attr = $('#'+ a);
+        let attr_btn =  $('#' + a +'_btn');
+        let mp = {};
+        attr_btn.click(function(){
+        if(attr_btn.attr('value')==='Edit'){
+            attr_btn.attr('value','Save');
+            attr.attr('contenteditable','true');
+            attr.css('cursor','text');
+        }else{
+            mp["attr_change"] = a;
+            mp["attr_value"] = attr.text();
+            // if(mp["attr_change"]==="name" || mp["attr_change"]==="dept" || mp["attr_change"]==="phone" || mp["attr_change"]==="qu"){
+            $('#'+mp["attr_change"]+'_2').text(mp["attr_value"]);
+            // }
+            $.ajax({
+                type:"post",
+                url:"/faculty_dashboard",
+                dataType:'json',
+                data:mp
+            });
+            attr_btn.attr('value','Edit');
+            attr.attr('contenteditable','false');
+            attr.css('cursor','pointer');
+        }
+
+
+    });
+    }
+    all_attrs('dept');
+    all_attrs('name');
+    all_attrs('phone_no');
+    all_attrs('qualification');
+
+</script>
+</body>
+</html>
+
+

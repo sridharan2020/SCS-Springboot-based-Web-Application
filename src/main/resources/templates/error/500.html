@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SCS</title>
+    <div th:replace="fragments/fragments.html::cdn"></div>
+    <div th:replace="fragments/fragments.html::navcss"></div>
+</head>
+<body>
+
+<div class="container-fluid custom-container">
+    <div class="div text-center" style="color: red;">
+        <div th:replace="fragments/fragments.html::header"></div>
+        The server encountered an internal error or misconfiguration and was unable to complete your request.
+        <div th:replace="fragments/fragments.html::footer"></div>
+    </div>
+</div>
+</body>
+</html>

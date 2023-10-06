@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scs</title>
+<!--     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+<!--    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>-->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/bootstrap5.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/font.css}" href="../../static/css/font.css" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="../../static/js/bootstrap.min.js"></script>
+    <style>
+    
+    
+    
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+    .header {
+
+        background: white;
+        color: #8C477E;
+        font-size: 15px;
+      }
+
+      ul {
+        list-style-type: none;
+     }
+	.navbar {
+		display: block;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.background {
+		background: #8C477E;
+		background-blend-mode: darken;
+		background-size: cover;
+	}
+
+	.nav-list {
+	    color: white;
+		display: flex;
+		align-items: center;
+	}
+
+	.logo {
+		display: flex;
+		justify-content: center;
+
+	}
+
+	.logo img {
+		width: 140px;
+		border-radius:35 px;
+	}
+    .events{
+            text-align: center;
+            padding: 10px 0;
+                align-items: center;
+                justify-content: center;
+                background: #8C477E;
+                color:white;
+                font-family: 'Ubuntu', sans-serif;
+          }
+
+
+	.center {
+		text-align: center;
+	}
+
+	.text-footer {
+		text-align: center;
+		padding: 10px 0;
+		font-family: 'Ubuntu', sans-serif;
+		display: flex;
+		justify-content: center;
+		color: white;
+	}
+ 
+    
+          a:hover { text-decoration: none; }
+          table, td, th {  
+  border: 1px solid black;
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 15px;
+  text-align:center
+}
+.button{
+	border-style:none;
+	color:white;
+}
+          </style>
+</head>
+
+
+
+<body>
+
+
+<div class="container-fluid">
+
+    <div class="header">
+        <div class="logo">
+           <img th:src= "@{images/SCS_lOGO.jpg}">
+            <ul><br><br>
+                <li><h1>Student Counselling Services</h1></li>
+                <li><h5>Indian Institute of Technology (Banaras Hindu University) Varanasi</h5></li>
+            </ul> </div>
+
+
+    <nav class="events">
+       INDUCTION MENTORS  </nav>
+
+    <br>
+          <div th:if="${admin}">
+          <div style="text-align:right">
+                  <button style="background-color:white;padding:2px; border-radius: 25px; border-color:#854779">  <a th:href="@{/inductionmentors/add}" style="color:#854779"> Add mentor <span>&#63; </span> </a></button>
+                </div>
+         </div>
+         <br>
+         <div th:if = "${flag}" sec:authorize="hasAnyAuthority('SCS_MEMBER')">
+          <div style="text-align:right">
+                    <a th:href="@{/inductionmentors/add}" th:text="#{inductionmentor.list.createNew}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2" />
+                    <form th:action="@{/inductionmentors/join/{membID}(membID=${member_id})}" method="post" class="js-submit-confirm " style="color:white">
+                        <button type="submit" style="background-color:#854779;padding:4px">Join as a mentor</button>
+                    </form>
+                </div>
+                </div>
+            <div th:if="${inductionmentors.empty}" th:text="#{inductionmentor.list.empty}" />
+            <div th:if="${!inductionmentors.empty}" class="overflow-x-auto">
+             
+             <table class="table">
+          
+        <thead style="background-color:#854779;color:white">
+        <tr>
+        
+                                   
+            <th scope="col">Mentor ID</th>
+            <th scope="col">Year</th>
+            <th scope="col">SCS member id</th>
+            <th scope="col">Group id</th>
+            <th scope="col" th:if="${admin}">Action</th>
+      
+        </tr>
+        </thead>
+        <tbody>
+       
+                     
+
+
+        <tr style="color:black" th:each="inductionmentor : ${inductionmentors}" >
+            		<td scope="row" th:text="${inductionmentor.mentorID}">Mentor ID</td>
+            		
+            		
+                    <td scope="row" th:text="${inductionmentor.year}">Year</td>
+                    
+                    
+                    <td scope="row" th:text="${inductionmentor.member_id}">SCS member id</td>
+                     <td th:if="${inductionmentor.im_grp_id != 'null'}" th:text="${inductionmentor.im_grp_id}" >Group id</td>
+   					<td th:if="${inductionmentor.im_grp_id == 'null'}">None</td>
+                           <td th:if="${admin}">
+                             
+                                <form th:action="@{/inductionmentors/delete/{mentorID}(mentorID=${inductionmentor.mentorID})}" th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm float-left" >
+                                      <a style="padding:3px" th:href="@{/inductionmentors/edit/{mentorID}(mentorID=${inductionmentor.mentorID})}"  ><i class='fas fa-edit' style='font-size:24px; color:#8C477E'></i></a>
+                                     <button  type="submit"  > <i class='fas fa-trash-alt' style='font-size:24px; color:#8C477E'></i></button>
+                                     
+                                </form>
+</td>
+</tr>
+</table>
+   
+
+  
+        <br>
+        <footer class="background">
+            <p class="text-footer">
+                contact us @ <a href="tel:+05890000111"></a>
+            </p>
+
+
+        </footer>
+</div>
+
+</body>
+
+</html>

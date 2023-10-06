@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scs</title>
+<!--    <link rel= "stylesheet" type="text/css" href="C:\Users\guddaji sriprada\Desktop\scs_frontend\css\style.css">-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+    <th:block th:replace="fragments/fragments.html::cdn"></th:block>
+    <th:block th:replace="fragments/fragments.html::navcss"></th:block>
+    <style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+    .header {
+
+        background: white;
+        color: #8C477E;
+        font-size: 15px;
+      }
+
+      ul {
+        list-style-type: none;
+     }
+	.navbar {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.background {
+		background: #8C477E;
+		background-blend-mode: darken;
+		background-size: cover;
+	}
+
+	.nav-list {
+	    color: white;
+		display: flex;
+		align-items: center;
+	}
+
+	.logo {
+		display: flex;
+		justify-content: center;
+
+	}
+
+	.logo img {
+		width: 140px;
+		border-radius:35px;
+	}
+
+
+
+	.center {
+		text-align: center;
+	}
+
+	.text-footer {
+		text-align: center;
+		padding: 10px 0;
+		font-family: 'Ubuntu', sans-serif;
+		display: flex;
+		justify-content: center;
+		color: white;
+	}
+
+
+
+   .cards {
+             margin: 0 auto;
+   			 max-width: 1500px;
+    		display: grid;
+   			 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    		
+    		gap: 10px;
+   			 font-family: sans-serif;
+    		padding-top: 10px;
+    		justify-content:center;
+          }
+   .card {
+            box-shadow: 1px 1px 1px 1px #6d3862;
+            transition: 0.3s;
+            padding:3px;
+            border-color:#8C477E;
+            border-width: 8px;
+           width:250px;
+           display:inline-block;
+           position: relative;
+           background-color:white;
+           
+          }
+
+
+          .card:hover {
+            box-shadow: 0 8px 8px 0 rgba(0,0,0,0.2);
+          }
+
+
+          .container {
+            padding: 2px 16px;
+            justify-content: center;
+          }
+          .events{
+            text-align: center;
+            padding: 18px 0;
+                align-items: center;
+                justify-content: center;
+                background: #8C477E;
+                color:white;
+                font-family: 'Ubuntu', sans-serif;
+          }
+
+          .card-title{
+            text-align: center;
+            padding: 10px 0;
+                align-items: center;
+                justify-content: center;
+                color:#854779;
+                font-family: 'Ubuntu', sans-serif;
+          }
+          .card-footer{
+            text-align: center;
+            padding: 10px 0;
+                align-items: center;
+                justify-content: center;
+                color:#8C477E;
+                font-family: 'Ubuntu', sans-serif;
+          }
+          .card-body{
+            text-align: center;
+            padding: 1px 0;
+                align-items: center;
+                justify-content: center;
+
+                font-family: 'Ubuntu', sans-serif;
+          }
+          a:hover { text-decoration: none; }
+          
+          .back{
+	background: -webkit-linear-gradient(to right,#c05eac, rgba(250,208,196,0.5));
+  
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, #c05eac, rgba(250,208,196,0.5))
+  
+}
+          </style>
+</head>
+
+
+
+<body>
+
+<div class="container-fluid">
+
+
+    <div th:replace="fragments/fragments.html::navbar"></div>
+
+
+    <nav class="events">
+        <b>COUNSELORS</b>
+    </nav>
+    <br>
+<div class="back">
+    <br>
+    <div th:if="${counselors.isEmpty()}" >  <div class="center" style="color:#854779;" th:text="#{event.list.empty}"></div></div>
+    <div th:if="${!counselors.isEmpty()}" class="overflow-x-auto">
+
+        <div class="cards" style="justify-content:center;  align-items: center;  vertical-align: middle;   ">
+      
+            <div  th:each="counselor : ${counselors}" class=" card" style="justify-self: center;" >
+          <a th:href="@{/counselors/{counselorID}(counselorID=${counselor.counselorId})}">
+            
+                <div class="card-body"  style=" color:black;">
+                    <h4 class="card-title" th:text="${counselor.name}" style="font-family: Times New Roman;font-size:25px;font-weight: bold;text-shadow: 2px 2px 2px #ababab;"></h4>
+                     <div class="card-body"><p style="font-family: Times New Roman;color:black;font-size:13px;">ID:<span style="font-family: Times New Roman;color:black;font-size:15px;font-weight: bold;text-shadow: 2px 2px 2px #ababab;" th:text="${counselor.counselorId}"></span></p></div>
+                     <h5> Qualification: <span th:text="${counselor.qualification}"></span></h5>
+                      <h5> Available timings :<span th:text="${counselor.start_time}"></span></h5>
+                       <h5><span th:text="${counselor.start_time}"/> <span th:text="${counselor.end_time}"/></h5>
+                       
+                       <!--<h5>Venue: <h5 th:text="${event.date}"  /></h5>-->
+                </div>
+                
+</a>
+</div>
+      
+
+        </div>
+    </div>
+    <br>
+</div>
+
+        <br>
+    <div th:replace="fragments/fragments.html ::footer"></div>
+</div>
+
+</body>
+
+</html>

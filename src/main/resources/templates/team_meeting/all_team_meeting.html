@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scs</title>
+<!--    <link th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">-->
+<!--    <script th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>-->
+<!--    <script th:src="@{/js/bootstrap.min.js}" src="../../static/js/bootstrap.min.js"></script>-->
+    <link th:href="@{/css/bootstrap5.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/font.css}" href="../../static/css/font.css" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="../../static/js/bootstrap.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+
+            background: white;
+            color: #8C477E;
+            font-size: 15px;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+        .navbar {
+            display: block;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .background {
+            background: #8C477E;
+            background-blend-mode: darken;
+            background-size: cover;
+        }
+
+        .nav-list {
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+
+        }
+
+        .logo img {
+            width: 140px;
+            border-radius:35px;
+        }
+
+
+
+        .center {
+            text-align: center;
+        }
+
+        .text-footer {
+            text-align: center;
+            padding: 10px 0;
+            font-family: 'Ubuntu', sans-serif;
+            display: flex;
+            justify-content: center;
+            color: white;
+        }
+
+        .card {
+
+            box-shadow: 1px 1px 1px 1px #6d3862;
+            transition: 0.3s;
+            padding:3px;
+            border-color:#8C477E;
+            border-width: 1px;
+            width:350px;
+            justify-content: center;
+            background-color:white;
+            border-style:solid;
+
+        }
+
+
+        .card:hover {
+            box-shadow: 0 8px 8px 0 rgba(0,0,0,0.2);
+            border-color:#6d3862;
+            border-width: 2px;
+            border-style:solid;
+
+        }
+
+
+        container {
+            padding: 1px 1px;
+            justify-content: center;
+            text-align: center;
+
+        }
+        .events{
+            text-align: center;
+            padding: 10px 0;
+            align-items: center;
+            justify-content: center;
+            background: #8C477E;
+            color:white;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        .card-title{
+            text-align: center;
+            padding: 10px 0;
+            align-items: center;
+            justify-content: center;
+            color:#854779;
+            font-family: 'Ubuntu', sans-serif;
+        }
+        .card-footer{
+            text-align: center;
+            padding: 10px 0;
+            align-items: center;
+            justify-content: center;
+            color:#8C477E;
+            font-family: 'Ubuntu', sans-serif;
+        }
+        .card-body{
+            text-align: center;
+            padding: 1px 0;
+            align-items: center;
+            justify-content: center;
+
+            font-family: 'Ubuntu', sans-serif;
+        }
+        a:hover { text-decoration: none; }
+        table, td, th {
+            border: 1px solid black;
+            text-align: left;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container-fluid">
+
+    <div class="header">
+        <div class="logo">
+            <img th:src="@{/images/SCS_lOGO.jpg}"  src="../../static/images/SCS_lOGO.jpg" />
+            <ul><br><br>
+                <li><h1>Student Counselling Services</h1></li>
+                <li><h5>Indian Institute of Technology (Banaras Hindu University) Varanasi</h5></li>
+            </ul> </div>
+
+
+        <nav class="events">
+            Team Meeting
+        </nav>
+
+        <br>
+        <div class=container style="border-color:#854779;border-radius:10px; width:520px; border-style:solid; " >
+            <br>
+            <center><h3 style="background-color:#854779;color:white;padding:3px " th:text="${team_meeting.meeting_title}" ></h3></center>
+            <br>
+            <center>
+                <div   class="card">
+                    <div class="card-body"  style=" color:black;">
+                        <b>Date: <h5 th:text="${team_meeting.date}"  ></h5></b>
+                        <b>From time:<h5 th:text="${team_meeting.from_time}" ></h5></b>
+                        <b>To time: <h5 th:text="${team_meeting.to_time}"  ></h5></b>
+                    </div>
+                </div>
+                <br>
+                <div  class="card">
+                    <p th:text="${team_meeting.meeting_description}"/>
+                </div>
+                <br>
+                <div  class="card">
+                    <p th:text="${team_meeting.location}"/>
+                </div>
+                <br>
+                <div  class="card">
+                    <p th:text="${organiser}"/>
+                </div>
+                <br>
+                <div  class="card">
+                    <p th:text="${vertical}"/>
+                </div>
+                <br><br>
+            </center>
+        </div>
+
+        <br>
+        <footer class="background">
+            <p class="text-footer">
+                contact us @ <a href="tel:+05890000111"></a>
+            </p>
+        </footer>
+    </div>
+</div>
+</body>
+</html>

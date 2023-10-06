@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+    <title>Monthly Reports</title>
+<!--    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>-->
+    <link th:href="@{/css/bootstrap5.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/font.css}" href="../../static/css/font.css" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="../../static/js/bootstrap.min.js"></script>
+
+    <th:block th:replace="fragments/fragments.html::cdn"></th:block>
+    <th:block th:replace="fragments/fragments.html::navcss"></th:block>
+
+
+</head>
+<body>
+    <div th:replace="fragments/fragments.html::navbar"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<div class="d-flex justify-content-center mt-5">
+    <div class="card border-3 border-secondary" style="width: 400px;">
+        <img th:src="@{/images/Notification.png}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title"> <span th:text="${vertical}"></span> Monthly Reports</h5>
+            <a th:href="@{/monthlyReports}">monthly reports list</a>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Title - </strong><span th:text="${monthlyReports.title}"></span></li>
+            <li class="list-group-item"><strong>Description - </strong><span th:text="${monthlyReports.report_description}"></span></li>
+            <li class="list-group-item"><strong>Compiled on- </strong><span th:text="${monthlyReports.compiled_on}"></span></li>
+            <li class="list-group-item"><strong>From Date- </strong><span th:text="${monthlyReports.from_date}"></span></li>
+            <li class="list-group-item"><strong>To Date- </strong><span th:text="${monthlyReports.to_date}"></span></li>
+            <li class="list-group-item"><strong>MadeBy- </strong><span th:text="${compiled_by}"></span></li>
+<!--            <li class="list-group-item"><strong>Vertical- </strong><span th:text="${vertical}"></span></li>-->
+        </ul>
+        <div class="d-flex justify-content-center card-body">
+            <div th:if="${monthlyReports.status}" class="btn btn-success card-link">Approved</div>
+            <div th:unless="${monthlyReports.status}" class="btn btn-secondary card-link">Not Approved</div>
+        </div>
+    </div>
+
+</div>
+<br><br>
+<div th:replace="fragments/fragments.html ::footer"></div>
+</body>
+</html>
